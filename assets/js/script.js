@@ -11,7 +11,7 @@ $(document).ready(function()  {
             getCurrentWeather(cityName);//Call function to get curent weather
             getForecast(cityName);//Call function to get forecast data
             saveCity(cityName);//Call function to save city to search history
-            $("search-input").val("");//Clear the input field after submission
+            $("#search-input").val("");//Clear the input field after submission
         }
     });
 
@@ -51,7 +51,7 @@ $.ajax({
 function saveCity(city) {
     
     //Get existing search history from local storage
-    var history = JSON.parse(localStorage.getItem("weatherhistory")) || [];
+    var history = JSON.parse(localStorage.getItem("weatherHistory")) || [];
 
     //Add new city to search history
     localStorage.setItem("weatherHistory", JSON.stringify(history));
