@@ -28,7 +28,28 @@ method: "GET",
     //Process response and display current weather for requested city
     console.log(response);
     //Display current weather data on that page
- });
+      });
+}
+
+//Function to get forecast data
+function getForecast(city) {
+    var apiKey = ""; //API Key
+    var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid" + apiKey;  
+
+//Making AJAX request to OpenWeatherMap API
+$.ajax({
+    url: queryURL,
+    method: "GET",
+     }).then(function (response)  {
+        //Process response and display current weather for requested city
+        console.log(response);
+        //Display current weather data on that page
+     });
+}
+
+// Function to save city to search history
+function saveCity(city) {
+    
 }
 
 });
