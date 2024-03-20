@@ -15,4 +15,20 @@ $(document).ready(function()  {
         }
     });
 
+    //Function to get current wweather data
+function getCurrentWeather(city)  {
+    var apiKey = ""; //API Key
+    var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid" + apiKey;
+
+//Making AJAX request to OpenWeatherMap API
+$.ajax({
+url: queryURL,
+method: "GET",
+ }).then(function (response)  {
+    //Process response and display current weather for requested city
+    console.log(response);
+    //Display current weather data on that page
+ });
+}
+
 });
