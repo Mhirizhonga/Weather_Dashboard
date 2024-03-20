@@ -17,8 +17,8 @@ $(document).ready(function()  {
 
     //Function to get current wweather data
 function getCurrentWeather(city)  {
-    var apiKey = ""; //API Key
-    var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid" + apiKey;
+    var apiKey = "0698e6ee1534490e088c24c085a18036"; //API Key
+    var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + apiKey;
 
 //Making AJAX request to OpenWeatherMap API
 $.ajax({
@@ -33,8 +33,8 @@ method: "GET",
 
 //Function to get forecast data
 function getForecast(city) {
-    var apiKey = ""; //API Key
-    var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid" + apiKey;  
+    var apiKey = "0698e6ee1534490e088c24c085a18036"; //API Key
+    var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + apiKey;  
 
 //Making AJAX request to OpenWeatherMap API
 $.ajax({
