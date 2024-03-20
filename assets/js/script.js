@@ -50,6 +50,43 @@ $.ajax({
 // Function to save city to search history
 function saveCity(city) {
     
+    //Get existing search history from local storage
+    var history = JSON.parse(localStorage.getItem("weatherhistory")) || [];
+
+    //Add new city to search history
+    localStorage.setItem("weatherHistory", JSON.stringify(history));
+
+    //Display updated search history on the page
+    displayHistory();
 }
+
+//Function to display search history on the page
+function displayHistory() {
+
+    //Get search history from localStorage
+    var history = JSON.parse(localStorage.getItem("weatherHistory")) || [];
+
+    //Clear existing search history displayed on the page
+    $("#history").empty();
+
+    //Loop through searcj history and display each city
+    history.forEach(function (city)  {
+        var listItem = $("<button>")
+        .addClass("list-group-item list-group-item-action")
+        .text(city);
+
+        //Add click event listener to each city in search history
+        listItem.click(function ()  {
+            getCurrentWeather(city);
+            getForecast(city);
+        })
+
+        //Append city to search history list
+        $("#history").append(listItem);
+    });
+}
+
+//Displaying search history on page load
+displayHistory();
 
 });
