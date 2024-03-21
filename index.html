@@ -27,16 +27,28 @@
         <form id="search-form" class="form">
           <div class="form-inline form-group">
             <div class="input-group">
-              <input class="form-input weather-search" type="text" id="search-input" placeholder="London"
+              <input class="form-input weather-search" type="text" id="search-input" placeholder="E.g., London, Beijing"
                 aria-labelledby="form-heading" aria-controls="today forecast" />
               <div class="input-group-append">
-                <button type="submit" class="btn search-button" id="search-button" aria-label="submit search">
-                  Search
-                </button>
+                <button type="submit" class="btn search-button" id="search-button" aria-label="submit search">Search</button>
                 <hr class="hr weather-hr" />
               </div>
             </div>
           </div>
+
+<div class="current-weather">
+  <div class="details">
+<h2>London (2024-03-21)</h2>
+<h4>Temperature: 19.10C</h4>
+<h4>Wind: 4.31 M/S</h4>
+<h4>Humidity: 79%</h4>
+  </div>
+  <div class="icon">
+    <img src="https://openweathermap.org/img/wn/10d@4x.png" alt="weather-icon">
+    <h4>Moderate Rain</h4>
+  </div>
+</div>
+
         </form>
         <div class="list-group" id="history"></div>
       </aside>
