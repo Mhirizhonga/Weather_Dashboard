@@ -122,7 +122,7 @@ var renderCities = () => {
         if (lastCity){
             $('#search-city').attr("value", lastCity);
         } else {
-            $('#search-city').attr("value", "Austin");
+            $('#search-city').attr("value", "London");
         }
     } else {
         // Build key of last city written to localStorage
