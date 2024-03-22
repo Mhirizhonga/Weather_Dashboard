@@ -3,7 +3,7 @@ var apiKey = "0698e6ee1534490e088c24c085a18036";
 var currentCity = "";
 var lastCity = "";
 
-
+// Error handler for fetch, trying to mimic the AJAX .fail command: https://www.tjvantoll.com/2015/09/13/fetch-and-errors/
 var handleErrors = (response) => {
     if (!response.ok) {
         throw Error(response.statusText);
@@ -17,7 +17,6 @@ var getCurrentConditions = (event) => {
     let city = $('#search-city').val();
     currentCity= $('#search-city').val();
 
-    // Set the queryURL to fetch from API using weather search - added units=metrics for UK weather
     let queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=metric" + "&APPID=" + apiKey;
     fetch(queryURL)
     .then(handleErrors)
@@ -30,8 +29,7 @@ var getCurrentConditions = (event) => {
         $('#search-error').text("");
         // Create icon for the current weather using Open Weather Maps
         let currentWeatherIcon="https://openweathermap.org/img/w/" + response.weather[0].icon + ".png";
-        
-        // Offset UTC to reflect GMT
+
         let currentTimeUTC = response.dt;
         let currentTimeZoneOffset = response.timezone;
         let currentTimeZoneOffsetHours = currentTimeZoneOffset / 60 / 60;
@@ -44,27 +42,14 @@ var getCurrentConditions = (event) => {
         $('#header-text').text(response.name);
         // HTML for the results of search
         let currentWeatherHTML = `
-            <h3>${response.name} (${currentGMTHours}:${currentGMTMinutes}:${currentGMTSeconds})<img src="${currentWeatherIcon}"></h3>
+            <h3>${response.name} ${currentMoment.format("(DD/MM/YYYY)")}<img src="${currentWeatherIcon}"></h3>
             <ul class="list-unstyled">
                 <li>Temperature: ${response.main.temp}&#8451;</li>
-                <li>Wind Speed: ${response.wind.speed} mph</li>
+                <li>Wind: ${response.wind.speed} mph</li>
                 <li>Humidity: ${response.main.humidity}%</li>
             </ul>`;
         // Append the results to the DOM
         $('#current-weather').html(currentWeatherHTML);
-        // Get the latitude and longitude for the UV search from Open Weather Maps API
-        let latitude = response.coord.lat;
-        let longitude = response.coord.lon;
-        let uvQueryURL = "api.openweathermap.org/data/2.5/uvi?lat=" + latitude + "&lon=" + longitude + "&APPID=" + apiKey;
-       
-        // API solution for Cross-origin resource sharing (CORS) error: https://cors-anywhere.herokuapp.com/
-        uvQueryURL = "https://cors-anywhere.herokuapp.com/" + uvQueryURL;
-        // Fetch the UV information and build the color display for the UV index
-        fetch(uvQueryURL)
-        .then(handleErrors)
-        .then((response) => {
-            return response.json();
-        })
     })
 }
 
@@ -100,7 +85,7 @@ var getFiveDayForecast = (event) => {
                         <li>${thisMoment.format("DD/MM/YY")}</li>
                         <li class="weather-icon"><img src="${iconURL}"></li>
                         <li>Temp: ${dayData.main.temp}&#8451;</li>
-                        <li>Wind: ${dayData.wind.speed}mph</li>
+                        <li>Wind: ${dayData.wind.speed} mph</li>
                         <li>Humidity: ${dayData.main.humidity}%</li>
                     </ul>
                 </div>`;
@@ -137,7 +122,7 @@ var renderCities = () => {
         if (lastCity){
             $('#search-city').attr("value", lastCity);
         } else {
-            $('#search-city').attr("value", "London");
+            $('#search-city').attr("value", "Austin");
         }
     } else {
         // Build key of last city written to localStorage
@@ -172,12 +157,14 @@ var renderCities = () => {
     
 }
 
+// New city search button event listener
 $('#search-button').on("click", (event) => {
 event.preventDefault();
 currentCity = $('#search-city').val();
 getCurrentConditions(event);
 });
 
+// Old searched cities buttons event listener
 $('#city-results').on("click", (event) => {
     event.preventDefault();
     $('#search-city').val(event.target.textContent);
@@ -185,11 +172,14 @@ $('#city-results').on("click", (event) => {
     getCurrentConditions(event);
 });
 
+// Clear old searched cities from localStorage event listener
 $("#clear-storage").on("click", (event) => {
     localStorage.clear();
     renderCities();
 });
 
+// Render the searched cities
 renderCities();
 
+// Get the current conditions (which also calls the five day forecast)
 getCurrentConditions();

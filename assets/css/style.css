@@ -1,4 +1,5 @@
 
+
 /* Header styling */
 #header{
     background-size: cover;
@@ -52,7 +53,7 @@
 
 /* Weather card styling */
 .weather-card{
-    width: 9.25rem;
+    width: 9.3rem;
     background-color: #0275d8;
     color: white;
     text-align: center;
