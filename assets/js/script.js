@@ -4,7 +4,8 @@ $(document).ready(function()  {
     $("#search-form").submit(function (event)  {
         event.preventDefault(); //Prevent default form submission behaviour
 
-        var cityName = $("#search-input").val().trim(); //Value of input field
+        let cityName = $("#search-input").val().trim(); //Value of input field
+        //console.log(cityName);
 
         //Checking property field is not empty
         if (cityName !== "")  {
@@ -16,9 +17,10 @@ $(document).ready(function()  {
     });
 
     //Function to get current wweather data
-function getCurrentWeather(city)  {
+function getCurrentWeather(cityName)  {
     var apiKey = "0698e6ee1534490e088c24c085a18036"; //API Key
-    var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + apiKey;
+    var queryURL = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}`;
+    console.log(cityName);
 
 //Making AJAX request to OpenWeatherMap API
 $.ajax({
@@ -26,15 +28,15 @@ url: queryURL,
 method: "GET",
  }).then(function (response)  {
     //Process response and display current weather for requested city
-    console.log(response);
+    //console.log(response);
     //Display current weather data on that page
       });
 }
 
 //Function to get forecast data
-function getForecast(city) {
+function getForecast(cityName) {
     var apiKey = "0698e6ee1534490e088c24c085a18036"; //API Key
-    var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + apiKey;  
+    var queryURL = `https://api.openweathermap.org/data/2.5/forecast?q=${cityName}&appid=${apiKey}`;  
 
 //Making AJAX request to OpenWeatherMap API
 $.ajax({
@@ -42,7 +44,7 @@ $.ajax({
     method: "GET",
      }).then(function (response)  {
         //Process response and display current weather for requested city
-        console.log(response);
+        //console.log(response);
         //Display current weather data on that page
      });
 }
