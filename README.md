@@ -18,13 +18,16 @@ This is a simple weather dashboard web application that allows users to search f
 - jQuery: jQuery library is utilized for DOM manipulation and event handling.
 - Moment.js: Moment.js library is used for handling and formatting dates and times.
 
-Usage
+## Usage
 1. Clone the repository to your local machine.
 2. Open the index.html file in a web browser.
 3. Enter the name of the city you want to check the weather for in the search box and click the search button.
 4. View the current weather conditions and five-day forecast for the searched city.
 5. To view the weather for a previously searched city, click on the city name from the search history list.
 6. To clear the search history, click the "clear" button.
+
+## Screenshot
+<img src="./assets/images/WeatherApp.png">
 
 ## Acknowledgements
 - Weather data is provided by the OpenWeatherMap API.
